@@ -1,0 +1,21 @@
+server.port: 0
+property1: gen-spec-prop1
+property2: gen-spec-prop2
+spring:
+  application:
+  #    name: purchase-service
+  output.ansi.enabled: ALWAYS
+  datasource:
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
+    hibernate:
+      # create-drop only for tests
+      ddl-auto: create-drop
+
+management:
+  endpoints.web.exposure.include: '*'
+  endpoint:
+    health:
+      show-details: always
