@@ -1,10 +1,6 @@
 server.port: 0
-property1: gen-spec-prop1
-property2: gen-spec-prop2
+
 spring:
-  application:
-  #    name: purchase-service
-  output.ansi.enabled: ALWAYS
   datasource:
     driver-class-name: org.postgresql.Driver
   jpa:
@@ -15,7 +11,18 @@ spring:
       ddl-auto: create-drop
 
 management:
-  endpoints.web.exposure.include: '*'
   endpoint:
+    shutdown:
+      enabled: true
     health:
       show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+eureka:
+  instance:
+    instanceId: ${spring.cloud.client.hostname}:${spring.application.name}:${spring.application.instance_id:${random.value}}}
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 3

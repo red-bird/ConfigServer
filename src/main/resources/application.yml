@@ -1,12 +1,16 @@
 server:
   port: 8888
 spring:
+  output.ansi.enabled: ALWAYS
   application:
     name: config-server
   profiles:
     active: native
   cloud:
     config:
+      disovery:
+        enabled: true
+        serviceId: config-server
       server:
         native:
           searchLocations: classpath:/config-repo
