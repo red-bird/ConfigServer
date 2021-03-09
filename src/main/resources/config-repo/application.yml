@@ -1,14 +1,7 @@
-server.port: 0
-
 spring:
-  datasource:
-    driver-class-name: org.postgresql.Driver
-  jpa:
-    database: postgresql
-    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
-    hibernate:
-      # create-drop only for tests
-      ddl-auto: create-drop
+  cloud:
+      ribbon:
+        enabled: false
 
 management:
   endpoint:
@@ -20,9 +13,3 @@ management:
     web:
       exposure:
         include: "*"
-
-eureka:
-  instance:
-    instanceId: ${spring.cloud.client.hostname}:${spring.application.name}:${spring.application.instance_id:${random.value}}}
-    leaseRenewalIntervalInSeconds: 1
-    leaseExpirationDurationInSeconds: 3

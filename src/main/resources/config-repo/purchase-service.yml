@@ -1,9 +1,24 @@
-datasource:
-  # online db
-  url: ${vars.url}
-  username: ${vars.username}
-  password: ${vars.pass}
-# locale db
-#    url: jdbc:postgresql://localhost:5432/purchase
-#    username: postgres
-#    password: 1945
+server:
+  port: 8081
+spring:
+  jpa:
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
+    hibernate:
+      # create-drop only for tests
+      ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO}
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${DATASOURCE_ADDR}:${DATASOURCE_PORT}/${DATASOURCE_DB}
+    username: ${DATASOURCE_USERNAME}
+    password: ${DATASOURCE_PASSWORD}
+  cloud:
+    loadbalancer:
+      cache:
+        ttl: 1s
+
+eureka:
+  instance:
+    instanceId: ${spring.application.name}:${random.uuid}
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 3
