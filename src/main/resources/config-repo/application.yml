@@ -5,11 +5,14 @@ spring:
 
 management:
   endpoint:
-    shutdown:
-      enabled: true
     health:
       show-details: always
   endpoints:
     web:
       exposure:
         include: "*"
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instanceId: ${spring.application.name}:${random.uuid}
